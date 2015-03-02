@@ -3,7 +3,7 @@ extends layout
 block content
 	h1= title
 	if !isAuthenticated
-		a(href='/signIn') Sign In Here
+		a(href='/signin') Sign In Here
 	else
 		p Welcome to #{title} #{user.name}
 		a(href='/logout') Logout
