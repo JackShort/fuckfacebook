@@ -4,12 +4,12 @@ head
 	meta(charset="UTF-8")
 	title Sign In
 body
-	form(action="" method="post" name="login")
+	form(action="/login" method="post" name="login")
 		input(type="text" name="email" placeholder="Email")
 		input(type="password" name="password" placeholder="Password")
 		input(type="submit" value="Login")
 
-	form(action="" method="post" name="signup")
+	form(action="/register" method="post" name="signup")
 		input(type="text" name="fullname" placeholder="Full Name")
 		input(type="text" name="username" placeholder="Username")
 		input(type="email" name="email" placeholder="Email")
