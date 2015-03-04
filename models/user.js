@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
+var ObjectId = mongoose.SchemaTypes.ObjectId;
 
 var userSchema = mongoose.Schema({
 	fullname: String,
@@ -7,6 +8,8 @@ var userSchema = mongoose.Schema({
 	email: String,
 	password: String,
 	description: String,
+	followers: [{ type: ObjectId, ref: 'User' }],
+	following: [{ type: ObjectId, ref: 'User' }],
 });
 
 userSchema.methods.generateHash = function(password) {
