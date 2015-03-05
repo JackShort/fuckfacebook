@@ -1,19 +1,34 @@
 extends layout
 
 block content
+	head
+		title Sign In
 	body
-		div(class="container")
-			div(class="row")
+		.container-fluid
+			h1 Welcome to fuckfacebook
+		.container
+			.row
 				form(action="/login" method="post" name="login")
-					div(class="col-md-1")
-						input(type="text" name="email" placeholder="Email")
-					input(type="password" class="col-md-1" name="password" placeholder="Password")
-					input(type="submit" class="col-md-1" value="Login")
-		div(class="container")
-			div(class="row")
+
+					.col-md-1.input-group
+						input(type="text" name="email" class="form-control" placeholder="Email" aria-describedby="sizing-addon2")
+					.col-md-1.input-group
+						input(type="password" name="password" class="form-control" placeholder="Password")
+					.col-md-1.input-group
+						input(type="submit" class='btn btn-primary btn-md' value="Login")
+		br
+
+		.container.center-block
+			.row
 				form(action="/register" method="post" name="signup")
-					input(type="text" name="fullname" placeholder="Full Name")
-					input(type="text" name="username" placeholder="Username")
-					input(type="email" name="email" placeholder="Email")
-					input(type="password" name="password" placeholder="Password")
-					input(type="submit" value="Register")
+
+					.col-md-1.input-group
+						input(type="text" name="fullname" class='form-control' placeholder="Full Name")
+					.col-md-1.input-group
+						input(type="text" name="username" class='form-control' placeholder="Username")
+					.col-md-1.input-group
+						input(type="text" name="email" class='form-control' class="form-control" placeholder="Email" aria-describedby="sizing-addon2")
+					.col-md-1.input-group
+						input(type="password" name="password" class='form-control' placeholder="Password")
+					.col-md-1.input-group
+						input(type="submit" class='btn btn-warning btn-md' value="Register")

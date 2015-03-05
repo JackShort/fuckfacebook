@@ -1,0 +1,26 @@
+extends layout
+
+block content
+	head
+		title #{user.fullname} | @#{user.username}
+	body
+		.panel.panel-default
+			.center-block
+				h1 #{user.username}
+
+				if user.username == currentUser.username
+					button(class="btn btn-default" value="Edit Profile")
+						span Edit Profile
+						span(class="glyphicon glyphicon-wrench")
+				else
+					button(class="btn btn-primary" value="Edit Profile")
+						span Follow
+
+	style.
+		.center-block {
+			float: none !important;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+		}
