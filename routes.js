@@ -43,11 +43,13 @@ module.exports = function(app, router, passport) {
 	router.get('/:name', checkForUser, function(req, res, next) {
 		res.render('profile', {
 			currentUser: req.user,
+			isFollowing: req.following,
 			user: req.userToLoad,
 			isAuthenticated: req.isAuthenticated(),
 		});
 	});
 
+	//Middleware functions
 	function checkForUser(req, res, next) {
 		User.findOne({ username: req.params.name }, function(err, user) {
 			if (err) {
@@ -58,9 +60,13 @@ module.exports = function(app, router, passport) {
 				res.send(404);
 			} else {
 				req.userToLoad = user;
-				next();
+				isFollowing(req, res, user);
 			}
 		});
+	}
+
+	function isFollowing(req, res, user) {
+		req.isFollowing = false;
 	}
 
 	function ensureAuthenticated(req, res, next) {
