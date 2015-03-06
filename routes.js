@@ -2,7 +2,7 @@ var User = require('./models/user');
 
 module.exports = function(app, router, passport) {
 	router.get('/', ensureAuthenticated, function(req, res, next) {
-		res.render('index', { title: 'fuckfacebook',
+		res.render('home', { title: 'BumpIt',
 			user: req.user
 		});
 	});

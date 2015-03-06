@@ -4,9 +4,9 @@ block content
 	head
 		title Sign In
 	body
-		.container-fluid
-			h1 Welcome to fuckfacebook
-		.container
+		.container-fluid.center
+			h1 Welcome to Bumpit
+		.container.center
 			.row
 				form(action="/login" method="post" name="login")
 
@@ -18,7 +18,7 @@ block content
 						input(type="submit" class='btn btn-primary btn-md' value="Login")
 		br
 
-		.container.center-block
+		.container.center
 			.row
 				form(action="/register" method="post" name="signup")
 
@@ -32,3 +32,9 @@ block content
 						input(type="password" name="password" class='form-control' placeholder="Password")
 					.col-md-1.input-group
 						input(type="submit" class='btn btn-warning btn-md' value="Register")
+	style.
+		.center {
+			float: none !important;
+			margin: 0 auto;
+			width: 700px;
+		}
