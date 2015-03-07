@@ -12,7 +12,10 @@ block content
 					button(class="btn btn-default" id="edit" value="Edit Profile")
 						span Edit Profile
 						span(class="glyphicon glyphicon-wrench")
-				else
+				else if isAuthenticated && isFollowing
+					button(class="btn btn-danger" id="unfollow" value="#{user.username}")
+						span Unfollow
+				else if isAuthenticated
 					button(class="btn btn-primary" id="follow" value="#{user.username}")
 						span Follow
 

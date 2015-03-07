@@ -30,8 +30,8 @@ module.exports = function(app, router, passport) {
 	}));
 
 	//On event
-	router.post('/follow', function(req, res, next) {
-		console.log(req.body.val);
+	router.post('/follow', followUser, function(req, res, next) {
+		res.send(202);
 	});
 
 	//HTML AUTHENTICATION IMPLEMENT LATER
@@ -49,7 +49,7 @@ module.exports = function(app, router, passport) {
 	router.get('/:name', checkForUser, function(req, res, next) {
 		res.render('profile', {
 			currentUser: req.user,
-			isFollowing: req.following,
+			isFollowing: req.isFollowing,
 			user: req.userToLoad,
 			isAuthenticated: req.isAuthenticated(),
 		});
@@ -66,14 +66,53 @@ module.exports = function(app, router, passport) {
 				res.send(404);
 			} else {
 				req.userToLoad = user;
-				isFollowing(req, res, user);
-				next();
+				if (req.user)
+					isFollowing(req, res, user, next);
+				else
+					next();
 			}
 			});
 	}
 
-	function isFollowing(req, res, user) {
-		req.isFollowing = false;
+	function isFollowing(req, res, user, next) {
+		req.user.populate({
+			path: 'following',
+			match: { username: user.username },
+			options: { limit: 1 }
+		}, function(err, currentuser) {
+			console.log(currentuser.username);
+			console.log(currentuser.following);
+			if (err)
+				throw err
+			else if (currentuser.following.length > 0) {
+				console.log('hello');
+				req.isFollowing = true;
+			} else {
+				console.log('no');
+				req.isFollowing = true;
+			}
+
+			next();
+		});
+	}
+
+	function followUser(req, res, next) {
+		followUserWithUserName(req, res, req.body.val);
+		req.isFollowing = true;
+		next();
+	}
+
+	function followUserWithUserName(req, res, username) {
+		User.findOne({ username: username }, function(err, user) {
+			if(err)
+				throw err
+			else {
+				req.user.following.push(user);
+				req.user.save(function(err) {
+					if (err) throw err
+				});
+			}
+		})
 	}
 
 	function ensureAuthenticated(req, res, next) {
