@@ -1,6 +1,7 @@
 var User = require('./models/user');
 
 module.exports = function(app, router, passport) {
+	//Rendering pages
 	router.get('/', ensureAuthenticated, function(req, res, next) {
 		res.render('home', { title: 'BumpIt',
 			user: req.user
@@ -27,6 +28,11 @@ module.exports = function(app, router, passport) {
 		failureRedirect: '/signin',
 		failureFlash: true
 	}));
+
+	//On event
+	router.post('/follow', function(req, res, next) {
+		console.log(req.body.val);
+	});
 
 	//HTML AUTHENTICATION IMPLEMENT LATER
 	router.use('/api', passport.authenticate('basic', { session: false }));
@@ -61,8 +67,9 @@ module.exports = function(app, router, passport) {
 			} else {
 				req.userToLoad = user;
 				isFollowing(req, res, user);
+				next();
 			}
-		});
+			});
 	}
 
 	function isFollowing(req, res, user) {

@@ -1,5 +1,5 @@
 {
-  "name": "fuckfacebook",
+  "name": "BumpIt",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "debug": "~2.1.1",
     "express": "~4.11.1",
     "jade": "~1.9.1",
+    "jquery": "^2.1.3",
     "mongoose": "^3.8.24",
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0"
